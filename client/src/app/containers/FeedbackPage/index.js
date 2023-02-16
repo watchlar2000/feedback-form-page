@@ -8,7 +8,6 @@ import { device } from "../../../utils/breakpoints";
 import { BubbleContainer } from "../../components/BubbleContainer";
 import { BubbleImgContainer } from "../../components/BubbleImgContainer";
 import { Button } from "../../components/Button";
-import { useClientWindowSize } from "../../hooks/useClientWindowSize";
 import { useWindowSize } from "../../hooks/useWindowSize";
 
 const FeedbackContainer = styled.div`
@@ -18,6 +17,7 @@ const FeedbackContainer = styled.div`
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
+  z-index: 20;
 
   @media ${device.tablet} {
     grid-template-columns: 1fr 1fr;
@@ -36,7 +36,7 @@ const BlobContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: ${(props) => (props.isHidden ? "hidden" : "")};
+  overflow: ${(props) => (props.client ? "hidden" : "visible")};
 
   @media ${device.tablet} {
     display: block;
@@ -45,7 +45,7 @@ const BlobContainer = styled.div`
 
 const ImageContainer = styled.div`
   position: absolute;
-  left: 0;
+  left: 45px;
   bottom: 10px;
   width: 800px;
   height: 800px;
@@ -84,6 +84,7 @@ const Input = styled.input`
   color: var(--secondary-font);
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
+  background: var(--white);
   ::placeholder {
     color: var(--secondary-font);
     opacity: 1;
@@ -107,7 +108,7 @@ const Textarea = styled.textarea`
   height: 150px;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
-
+  background: var(--white);
   ::placeholder {
     color: var(--secondary-font);
     opacity: 1;
@@ -124,8 +125,11 @@ export function FeedbackPage() {
     msg: "",
   });
 
-  const sizeWindow = useWindowSize();
-  const sizeClientWindow = useClientWindowSize();
+  const { width: windowWidth } = useWindowSize();
+
+  const isScrollXVisible = () => {
+    return windowWidth < 1707;
+  };
 
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -177,7 +181,8 @@ export function FeedbackPage() {
 
         {/* <h3>{sizeClientWindow.width - sizeWindow.width}</h3> */}
       </FormWrapper>
-      <BlobContainer isHidden={true}>
+
+      <BlobContainer client={isScrollXVisible()}>
         <ImageContainer></ImageContainer>
         <BubbleContainer top="50%" left="0" zIndex="10">
           <BubbleImgContainer src={bubbleYellow} alt="yellow bubble" />
@@ -187,7 +192,7 @@ export function FeedbackPage() {
         </BubbleContainer>
       </BlobContainer>
 
-      <BubbleContainer top="5px" left="20px">
+      <BubbleContainer top="5px" left="20px" zIndex="-50">
         <BubbleImgContainer
           src={bubbleYellowSmall}
           alt="yellow bubble"

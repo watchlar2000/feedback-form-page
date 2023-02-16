@@ -48,7 +48,11 @@ export function Footer() {
         />
       </BubbleContainer>
       <BubbleContainer top="0" right="150px">
-        <BubbleImgContainer src={bubbleGreen} alt="green bubble" display />
+        <BubbleImgContainer
+          src={bubbleGreen}
+          alt="green bubble"
+          display="none"
+        />
       </BubbleContainer>
     </FooterContainer>
   );

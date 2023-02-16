@@ -6,7 +6,7 @@ export const BubbleImgContainer = styled.img.attrs((props) => ({
   alt: props.alt,
 }))`
   width: ${(props) => (props.width ? props.width : "")};
-  display: ${(props) => (props.display ? "none" : "")};
+  display: ${(props) => (props.display ? props.display : "block")};
 
   @media ${device.tablet} {
     width: auto;

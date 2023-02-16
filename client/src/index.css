@@ -1,0 +1,4 @@
+@import-normalize;
+@import "./assets/styles/_globals.css";
+@import "./assets/styles/_variables.css";
+@import "./assets/styles/styles.css";

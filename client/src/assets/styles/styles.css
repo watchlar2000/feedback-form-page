@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Apercu Arabic Pro";
+  src: local("Apercu Arabic Pro Regular"), local("Apercu-Arabic-Pro-Regular"),
+    url("../../assets/fonts/ApercuArabicPro-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/ApercuArabicPro-Regular.woff") format("woff"),
+    url("../../assets/fonts/ApercuArabicPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: "Apercu Arabic Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 180%;
+  color: var(--primary-font);
+  background-image: url("../../assets/images/clouds.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--primary-background);
+}

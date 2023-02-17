@@ -13,7 +13,7 @@ import { useWindowSize } from "../../hooks/useWindowSize";
 const FeedbackContainer = styled.div`
   flex: 1;
   width: 100%;
-  max-width: 1280px;
+  max-width: 100%;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
@@ -67,12 +67,13 @@ const FormWrapper = styled.div`
   gap: 20px;
   padding: 0 20px;
 
-  @media ${device.tablet} {
-    margin-right: 50px;
+  @media ${device.laptop} {
+    padding-left: 50px;
   }
 
-  @media ${device.desktop} {
-    padding: 0;
+  @media ${device.laptopL} {
+    margin-right: 50px;
+    padding-left: 200px;
   }
 `;
 

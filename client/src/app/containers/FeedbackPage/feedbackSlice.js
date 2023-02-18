@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   feedbackList: [],
-  currentFeedbackSentStatus: true,
+  currentFeedbackSentStatus: false,
 };
 
 export const feedbackPageSlice = createSlice({

@@ -22,7 +22,6 @@ export const FeedbackForm = () => {
 
   const [feedbackData, setFeedbackData] = useState(initFeedbackData);
   const [validation, setValidation] = useState(false);
-
   const { name, email, message } = feedbackData;
 
   const handleForm = (e) => {
@@ -33,17 +32,22 @@ export const FeedbackForm = () => {
     });
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const isValid = validateInput(feedbackData);
     setValidation(true);
 
     if (isValid) {
       setValidation(false);
-      createNewFeedback(feedbackData);
-      dispatch(feedbackAdded(feedbackData));
-      dispatch(currentFeedbackSentStatusChanged(true));
-      setFeedbackData(initFeedbackData);
+      try {
+        const res = await createNewFeedback(feedbackData);
+        if (res.error) throw new Error(res.message);
+        dispatch(feedbackAdded(feedbackData));
+        dispatch(currentFeedbackSentStatusChanged(true));
+        setFeedbackData(initFeedbackData);
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   };
 
@@ -58,9 +62,7 @@ export const FeedbackForm = () => {
 
   return (
     <FeedbackFormGroup>
-      {validation && name === "" && (
-        <ErrorMsg msg="Name is required"></ErrorMsg>
-      )}
+      {validation && name === "" && <ErrorMsg msg="Name required"></ErrorMsg>}
       <FeedbackInput
         type="text"
         name="name"
@@ -68,9 +70,7 @@ export const FeedbackForm = () => {
         onChange={handleForm}
         placeholder="Your name*"
       />
-      {validation && email === "" && (
-        <ErrorMsg msg="Email is required"></ErrorMsg>
-      )}
+      {validation && email === "" && <ErrorMsg msg="Email required"></ErrorMsg>}
       <FeedbackInput
         type="email"
         name="email"

@@ -10,7 +10,9 @@ const createNewFeedback = async (newFeedback) => {
     body: JSON.stringify(newFeedback),
   };
 
-  fetch(URL, requestOptions);
+  return fetch(URL, requestOptions)
+    .then((res) => res.json())
+    .then((data) => data);
 };
 
 const getAll = () => {

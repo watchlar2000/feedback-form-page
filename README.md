@@ -13,7 +13,7 @@
 #### BACKEND
 
 - Nest JS
-- Postgres ?
+- PostgreSQL
 
 ## Follow the steps below to run the app locally:
 

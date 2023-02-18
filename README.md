@@ -2,15 +2,21 @@
 
 <p>I'm applying to get an internish at Zenbit Tech and this is my test assignment. It's a full-stack responsible feedback form page.</p>
 
-### I used the following stack:
+### To create this app I used the following:
 
-### FRONTEND
+#### FRONTEND
 
 - React
 - Styled-components
 - Redux ?
 
-### BACKEND
+#### BACKEND
 
 - Nest JS
 - Postgres ?
+
+### Follow the steps below to run the app locally:
+
+```Test text
+
+```

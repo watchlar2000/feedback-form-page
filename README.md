@@ -8,7 +8,7 @@
 
 - React
 - Styled-components
-- Redux ?
+- Redux
 
 #### BACKEND
 

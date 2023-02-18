@@ -1,3 +1,5 @@
+const URL = "http://localhost:5000/feedback";
+
 const createNewFeedback = async (newFeedback) => {
   console.log(
     `Sent post request with the following data: ${JSON.stringify(newFeedback)}`,
@@ -8,11 +10,11 @@ const createNewFeedback = async (newFeedback) => {
     body: JSON.stringify(newFeedback),
   };
 
-  fetch("http://localhost:5000/feedback", requestOptions);
+  fetch(URL, requestOptions);
 };
 
 const getAll = () => {
-  return fetch("http://localhost:5000/feedback").then((res) => res.json());
+  return fetch(URL).then((res) => res.json());
 };
 
 export { getAll, createNewFeedback };

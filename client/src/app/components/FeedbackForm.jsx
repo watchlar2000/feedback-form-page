@@ -1,5 +1,10 @@
-import { useEffect, useState } from "react";
-import { createNewFeedback, getAll } from "../../api/feedback.api";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createNewFeedback } from "../../api/feedback.api";
+import {
+  currentFeedbackSentStatusChanged,
+  feedbackAdded,
+} from "../containers/FeedbackPage/feedbackSlice";
 import { Button } from "./Button";
 import { ErrorMsg } from "./FeedbackFormErrorMsg";
 import { FeedbackFormGroup } from "./FeedbackFormGroup";
@@ -13,25 +18,12 @@ const initFeedbackData = {
 };
 
 export const FeedbackForm = () => {
+  const dispatch = useDispatch();
+
   const [feedbackData, setFeedbackData] = useState(initFeedbackData);
   const [validation, setValidation] = useState(false);
 
   const { name, email, message } = feedbackData;
-
-  useEffect(() => {
-    async function fetchFeedbackList() {
-      try {
-        const data = await getAll();
-        console.log(data);
-      } catch {
-        console.log(
-          "Ooops. Seems like server is not running. Please go to readme file and follow the instructions to set up the server and run it locally.",
-        );
-      }
-    }
-
-    fetchFeedbackList();
-  }, []);
 
   const handleForm = (e) => {
     const { name, value } = e.target;
@@ -49,6 +41,8 @@ export const FeedbackForm = () => {
     if (isValid) {
       setValidation(false);
       createNewFeedback(feedbackData);
+      dispatch(feedbackAdded(feedbackData));
+      dispatch(currentFeedbackSentStatusChanged(true));
       setFeedbackData(initFeedbackData);
     }
   };

@@ -22,6 +22,7 @@ export const FeedbackForm = () => {
 
   const [feedbackData, setFeedbackData] = useState(initFeedbackData);
   const [validation, setValidation] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { name, email, message } = feedbackData;
 
   const handleForm = (e) => {
@@ -39,18 +40,20 @@ export const FeedbackForm = () => {
 
     if (isValid) {
       setValidation(false);
+      setLoading(true);
       try {
         const res = await createNewFeedback(feedbackData);
         if (res.error) throw new Error(res.message);
         dispatch(feedbackAdded(feedbackData));
         dispatch(currentFeedbackSentStatusChanged(true));
         setFeedbackData(initFeedbackData);
+        setLoading(false);
       } catch (e) {
-        // console.log(e.message);
         alert(
           `Seems like server is not running. \n\nPlease go to readme file, follow the instructions to set up the server locally and run it on your machine, and try one more time to send the feedback. \n\nNOTE that after pressing OK the input fields will be reset.`,
         );
         setFeedbackData(initFeedbackData);
+        setLoading(false);
       }
     }
   };
@@ -92,7 +95,7 @@ export const FeedbackForm = () => {
         onChange={handleForm}
         placeholder="Your message*"
       />
-      <Button onClick={submit} radius="50%" marginTop="12px">
+      <Button onClick={submit} disabled={loading} radius="50%" marginTop="12px">
         Send message
       </Button>
     </FeedbackFormGroup>

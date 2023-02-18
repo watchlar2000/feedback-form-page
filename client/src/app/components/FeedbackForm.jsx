@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createNewFeedback, getAll } from "../../api/feedback.api";
 import { Button } from "./Button";
+import { ErrorMsg } from "./FeedbackFormErrorMsg";
 import { FeedbackFormGroup } from "./FeedbackFormGroup";
 import { FeedbackInput } from "./FeedbackInput";
 import { FeedbackTextarea } from "./FeedbackTextarea";
@@ -13,6 +14,7 @@ const initFeedbackData = {
 
 export const FeedbackForm = () => {
   const [feedbackData, setFeedbackData] = useState(initFeedbackData);
+  const [validation, setValidation] = useState(false);
 
   const { name, email, message } = feedbackData;
 
@@ -23,7 +25,7 @@ export const FeedbackForm = () => {
         console.log(data);
       } catch {
         console.log(
-          "Seems like server is not running. Please go to readme file and follow the instructions to set up and run the server.",
+          "Ooops. Seems like server is not running. Please go to readme file and follow the instructions to set up the server and run it locally.",
         );
       }
     }
@@ -41,12 +43,30 @@ export const FeedbackForm = () => {
 
   const submit = (e) => {
     e.preventDefault();
-    createNewFeedback(feedbackData);
-    setFeedbackData(initFeedbackData);
+    const isValid = validateInput(feedbackData);
+    setValidation(true);
+
+    if (isValid) {
+      setValidation(false);
+      createNewFeedback(feedbackData);
+      setFeedbackData(initFeedbackData);
+    }
+  };
+
+  const validateInput = (toValidate) => {
+    const inputValues = Object.values(toValidate);
+    const isThereEmptyElements = inputValues.findIndex(
+      (val) => val.trim() === "",
+    );
+
+    return isThereEmptyElements === -1 ? true : false;
   };
 
   return (
     <FeedbackFormGroup>
+      {validation && name === "" && (
+        <ErrorMsg msg="Name is required"></ErrorMsg>
+      )}
       <FeedbackInput
         type="text"
         name="name"
@@ -54,6 +74,9 @@ export const FeedbackForm = () => {
         onChange={handleForm}
         placeholder="Your name*"
       />
+      {validation && email === "" && (
+        <ErrorMsg msg="Email is required"></ErrorMsg>
+      )}
       <FeedbackInput
         type="email"
         name="email"
@@ -61,6 +84,9 @@ export const FeedbackForm = () => {
         onChange={handleForm}
         placeholder="Your email*"
       />
+      {validation && message === "" && (
+        <ErrorMsg msg="We are looking forward to hearing from you"></ErrorMsg>
+      )}
       <FeedbackTextarea
         type="text"
         name="message"

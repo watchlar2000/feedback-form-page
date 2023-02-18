@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
   db:
@@ -6,10 +6,11 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: "feedback_management"
     ports:
-      - '5432:5432'
+      - "5432:5432"
   adminer:
     image: adminer
     restart: always
     ports:
-      - '8888:8080'
+      - "8888:8080"

@@ -15,8 +15,42 @@
 - Nest JS
 - Postgres ?
 
-### Follow the steps below to run the app locally:
+## Follow the steps below to run the app locally:
 
-```Test text
-
+```bash
+# Create and start containers
+docker compose up
 ```
+
+```bash
+cd server
+```
+
+```bash
+# Install server dependencies
+yarn
+```
+
+```bash
+# Backend watch mode
+yarn start:dev
+```
+
+```bash
+cd ../client
+```
+
+```bash
+# Install client dependencies
+yarn
+```
+
+```bash
+# Frontend dev mode
+yarn start
+```
+
+## Stay in touch
+
+- Author - [Sergii](https://www.linkedin.com/in/sergii-koch/)
+- instagram - [watchlar](https://www.instagram.com/watchlar2000/)

@@ -2,7 +2,9 @@ const URL = "http://localhost:5000/feedback";
 
 const createNewFeedback = async (newFeedback) => {
   console.log(
-    `Sent post request with the following data: ${JSON.stringify(newFeedback)}`,
+    `Sending post request with the following data: ${JSON.stringify(
+      newFeedback,
+    )}`,
   );
   const requestOptions = {
     method: "POST",

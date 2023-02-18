@@ -46,7 +46,11 @@ export const FeedbackForm = () => {
         dispatch(currentFeedbackSentStatusChanged(true));
         setFeedbackData(initFeedbackData);
       } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
+        alert(
+          `Seems like server is not running. \n\nPlease go to readme file, follow the instructions to set up the server locally and run it on your machine, and try one more time to send the feedback. \n\nNOTE that after pressing OK the input fields will be reseted.`,
+        );
+        setFeedbackData(initFeedbackData);
       }
     }
   };

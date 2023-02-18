@@ -18,6 +18,15 @@
 ## Follow the steps below to run the app locally:
 
 ```bash
+# Clone the repo
+git clone https://github.com/watchlar2000/feedback-form-page.git
+```
+
+```bash
+cd feedback-form-page
+```
+
+```bash
 # Create and start containers
 docker compose up
 ```
